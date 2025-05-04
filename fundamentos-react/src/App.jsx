@@ -3,53 +3,32 @@
 
 // En Vite podemos importar imágenes directamente desde la carpeta src/assets/images/ejemplo-img.jpg
 import img1 from './assets/images/ejemplo-img.jpg';
-
-const MyButton = ({ text }) => { // props es un objeto que contiene todas las propiedades que le pasamos al componente. Se puede desestructurar para obtener las propiedades que necesitamos.
-    const handleClickButton = (title) => {
-        console.log("Soy un click " + title);
-    }
-    return ( // La función en onClick se ejecuta al dar click al botón. Pero, si quisieramos pasarle un argumento, se debe usar una función anónima o una función flecha.
-        <button onClick={() => handleClickButton(text)}>
-            {text}
-        </button>
-    )
-}
-
-const WelcomeText = ({ user }) => user ? <h2>Online</h2> : <h2>Offline</h2>;
-
-const ItemFruta = (props) => {
-    return (
-        <li>
-            {props.fruta}
-        </li>
-    )
-};
-
+import MyButton from './components/MyButton.jsx'; // Importar un componente de otro archivo
+import WelcomeText from './components/WelcomeText.jsx'; // Importar un componente de otro archivo
+import ListFruts from './components/ListFruts.jsx'; // Importar un componente de otro archivo
+import NoControlado from './components/NoControlado.jsx'; // Importar un componente de otro archivo
 
 const App = () => {
 
     const title = "Hola soy React-desde title"; // Variable de tipo string
     const user = false;
-    const frutas = ["🍐", "🍎", "🍉"];
+    const frutas = ["🍐", "🍉", "🍎"]; // Variable de tipo array
+
 
     return (
         // Los componentes HTML deben estar dentro de un contenedor al usarse ()
         <>
             <h1 className="text-center">{title}</h1>
             <img src={img1} alt="Imagen de prueba React JS" />
+            <h2>Lista de frutas</h2>
+            <ListFruts frutas={frutas} />
             <MyButton text="boton-1" />
             <MyButton text="boton-2" />
-            <MyButton text="boton-3" />
             <WelcomeText user={user} />
-            <ul>
-                {
-                    frutas.map((item, index) => {
-                        return (
-                            <ItemFruta key={index} fruta={item} />
-                        )
-                    })
-                }
-            </ul>
+            <div className="container">
+                <h1>Formularios no controlados</h1>
+                <NoControlado />
+            </div>
         </>
     ); /* Export un archivo JSX. Está más cerca de JS que de HTML */
 }
