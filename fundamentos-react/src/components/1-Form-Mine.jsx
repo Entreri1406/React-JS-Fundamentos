@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 
-const Controlado = ({ addTodo }) => {
+const Controlado = ({ insertedArray }) => {
 
     // Se crea una referencia al formulario para poder acceder a sus valores
     const [todo, setTodo] = useState({
@@ -24,20 +24,6 @@ const Controlado = ({ addTodo }) => {
                 text: 'Los campos título y descripción son obligatorios.',
             })
         }
-
-        addTodo({
-            id: Date.now(), // Se usa Date.now() para generar un id único basado en la fecha y hora actual.
-            ...todo,
-            state: state.toLowerCase() === 'completado'
-        })
-
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Actividad agregada correctamente',
-            showConfirmButton: false,
-            timer: 1000
-        })
     };
     const handleChange = (e) => {
 
